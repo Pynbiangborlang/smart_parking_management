@@ -1,3 +1,55 @@
+CREATE EXTENSION pgcrypto;
+--1. ADMIN
+
+INSERT INTO ADMIN (admin_email, phone_no, first_name, last_name, gender, password) VALUES
+('john.smith@gmail.com',	'5316849271',	'John',	'Smith', 'MALE', crypt('johndoe#1234', gen_salt('md5')));
+
+
+--2. PARKING_LOT
+
+INSERT INTO PARKING_LOT(parking_lot_id, name, address, admin_email) VALUES
+('J.SMITH PARKING',	'123 Main Street', 'Cityville'	'john.smith@gmail.com');
+
+INSERT INTY SECTIONS (section_id, name, parking_lot_id) VALUES
+('SECTION-1', 1)
+('SECTION-2', 1)
+('SECTION-3', 1)
+
+--3 PARKING_SECTIONS
+INSERT INT PARKING_SPACE(name, status, section_id, type) VALUES
+('SEC1-SP1','AVAILABLE',	1,	'TWO-WHEELER'),
+('SEC1-SP2','AVAILABLE',	1,	'TWO-WHEELER'),
+('SEC1-SP3','AVAILABLE',	1,	'TWO-WHEELER'),
+('SEC1-SP4','AVAILABLE',	1,	'TWO-WHEELER'),
+('SEC1-SP5','AVAILABLE',	1,	'TWO-WHEELER'),
+( 'SEC1-SP6', 'AVAILABLE',	1,	'TWO-WHEELER'),
+( 'SEC2-SP1','AVAILABLE',    2	,'FOUR-WHEELER'),
+('SEC2-SP2','AVAILABLE',     2	,'FOUR-WHEELER'),
+('SEC2-SP3','AVAILABLE',2	,'FOUR-WHEELER'),
+('SEC2-SP4','AVAILABLE',2	,'FOUR-WHEELER'),
+('SEC2-SP5','AVAILABLE',2	,'FOUR-WHEELER'),
+('SEC2-SP6','AVAILABLE',2	,'FOUR-WHEELER'),
+('SEC2-SP7','AVAILABLE',2	,'FOUR-WHEELER'),
+('SEC2-SP8','AVAILABLE',2	,'FOUR-WHEELER'),
+('SEC2-SP9','AVAILABLE',2	,'FOUR-WHEELER'),
+('SEC2-SP10','AVAILABLE',2	,'FOUR-WHEELER'),
+('SEC2-SP11','AVAILABLE',2	,'FOUR-WHEELER'),
+('SEC2-SP12','AVAILABLE',2	,'FOUR-WHEELER'),
+('SEC3-SP1','AVAILABLE',3	,'FOUR-WHEELER'),
+('SEC3-SP2','AVAILABLE',3	,'FOUR-WHEELER'),
+('SEC3-SP3','AVAILABLE',3	,'FOUR-WHEELER'),
+('SEC3-SP4','AVAILABLE',3	,'FOUR-WHEELER'),
+('SEC3-SP5','AVAILABLE',3	,'FOUR-WHEELER'),
+('SEC3-SP6','AVAILABLE',3	,'FOUR-WHEELER'),
+('SEC3-SP7','AVAILABLE',3	,'FOUR-WHEELER'),
+('SEC3-SP8','AVAILABLE',3	,'FOUR-WHEELER'),
+('SEC3-SP9','AVAILABLE',3	,'FOUR-WHEELER'),
+('SEC3-SP10','AVAILABLE',3	,'FOUR-WHEELER'),
+('SEC3-SP11','AVAILABLE',3	,'FOUR-WHEELER'),
+('SEC3-SP12','AVAILABLE',3	,'FOUR-WHEELER');
+
+
 INSERT INTO USERS (EMAIL, PHONE, FIRST_NAME, LAST_NAME, GENDER, AGE, STATUS, RFID_TAG, PASSWORD) VALUES
 ('john.doe@gmail.com', '+1234567890', 'John', 'Doe', 'Male', 30, 'ACTIVE', crypt('ABC123',gen_salt('md5')), crypt('johndoe#1234', gen_salt('md5'))),
 ('jane.smith@gmail.com', '+9876543210', 'Jane', 'Smith', 'Female', 25, 'ACTIVE', crypt('XYZ456',gen_salt('md5')), crypt('janeX@4321', gen_salt('md5')));
+
