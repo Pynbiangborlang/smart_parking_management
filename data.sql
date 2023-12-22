@@ -1,6 +1,5 @@
 CREATE EXTENSION pgcrypto;
 --1. ADMIN
-
 INSERT INTO ADMIN (admin_email, phone_no, first_name, last_name, gender, password) VALUES
 ('john.smith@gmail.com',	'5316849271',	'John',	'Smith', 'MALE', crypt('johndoe#1234', gen_salt('md5')));
 
@@ -8,15 +7,19 @@ INSERT INTO ADMIN (admin_email, phone_no, first_name, last_name, gender, passwor
 --2. PARKING_LOT
 
 INSERT INTO PARKING_LOT(name, address, admin_email) VALUES
-('J.SMITH PARKING',	'123 Main Street', 'Cityville'	'john.smith@gmail.com');
+('J.SMITH PARKING',	'123 Main Street, Cityville'	'john.smith@gmail.com');
 
-INSERT INTY SECTIONS (name, parking_lot_id) VALUES
-('SECTION-1', 1)
-('SECTION-2', 1)
-('SECTION-3', 1)
+INSERT INTO SECTIONS (name, parking_lot_id) VALUES
+('SECTION-1', 1),
+('SECTION-2', 1),
+('SECTION-3', 1),
+
+INSERT INTO SPACE_TYPE(type, rate_per_min) VALUES
+('TWO-WHEELER',	0.3),
+('FOUR-WHEELER',	0.5);
 
 --3 PARKING_SECTIONS
-INSERT INT PARKING_SPACE(name, status, section_id, type) VALUES
+INSERT INTO PARKING_SPACE(name, status, section_id, type) VALUES
 ('SEC1-SP1','AVAILABLE',	1,	'TWO-WHEELER'),
 ('SEC1-SP2','AVAILABLE',	1,	'TWO-WHEELER'),
 ('SEC1-SP3','AVAILABLE',	1,	'TWO-WHEELER'),
@@ -81,8 +84,19 @@ INSERT INTO PARKING_SENSOR(tag, status, space_id) FROM stdin;
 ('SEC3-SP11-S11', 'ACTIVE' ,29),
 ('SEC3-SP12-S12', 'ACTIVE' ,30);
 
-
+--5 USERS
 INSERT INTO USERS (EMAIL, PHONE, FIRST_NAME, LAST_NAME, GENDER, AGE, STATUS, RFID_TAG, PASSWORD) VALUES
 ('john.doe@gmail.com', '+1234567890', 'John', 'Doe', 'Male', 30, 'ACTIVE', crypt('ABC123',gen_salt('md5')), crypt('johndoe#1234', gen_salt('md5'))),
 ('jane.smith@gmail.com', '+9876543210', 'Jane', 'Smith', 'Female', 25, 'ACTIVE', crypt('XYZ456',gen_salt('md5')), crypt('janeX@4321', gen_salt('md5')));
 
+
+--6 GATES
+-- Insert data into GATES table
+INSERT INTO GATES (TYPE, SENSOR_TAG, SENSOR_STATUS, PARKING_LOT_ID) VALUES
+  ('ENTRY', 'ENT001', 'ACTIVE', 1),
+  ('EXIT', 'EXT001', 'ACTIVE', 1);
+
+--GATE SENSORS READING
+-- Insert data into GATE_SENSOR_READING table
+INSERT INTO GATE_SENSOR_READING (DATE, SENSOR_TAG, RFID_TAG) VALUES
+  (CURRENT_TIMESTAMP, 'ENT001', 'ABC123');
