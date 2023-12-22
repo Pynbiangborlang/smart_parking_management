@@ -9,10 +9,10 @@ INSERT INTO ADMIN (admin_email, phone_no, first_name, last_name, gender, passwor
 INSERT INTO PARKING_LOT(name, address, admin_email) VALUES
 ('J.SMITH PARKING',	'123 Main Street, Cityville', 'john.smith@gmail.com');
 
-INSERT INTO SECTIONS (section_id, name, parking_lot_id) VALUES
-(1, 'SECTION-1', 1),
-(2, 'SECTION-2', 1),
-(3, 'SECTION-3', 1),
+INSERT INTO SECTIONS (name, parking_lot_id) VALUES
+('SECTION-1', 1),
+('SECTION-2', 1),
+('SECTION-3', 1);
 
 INSERT INTO SPACE_TYPE(type, rate_per_min) VALUES
 ('TWO-WHEELER',	0.3),
