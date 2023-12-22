@@ -112,6 +112,7 @@ $$ LANGUAGE plpgsql;
 -- Call the stored procedure with a specific user ID
 SELECT * FROM get_user_wallet_transactions(1); -- Replace 1 with the desired user ID
 
+CREATE INDEX idx_user_wallet_history_user_id ON USER_WALLET_HISTORY(USER_ID);
 
 -- Create a stored procedure named calculate_monthly_income
 CREATE OR REPLACE PROCEDURE calculate_monthly_income(
@@ -137,9 +138,11 @@ BEGIN
 END;
 $$LANGUAGE plpgsq;
 
-
 -- Call the stored procedure with specific month and year
 SELECT * FROM calculate_monthly_income(1, 2023); -- Replace 1 and 2023 with the desired month and year
+
+CREATE INDEX idx_transaction_type ON USER_WALLET_HISTORY (TYPE);
+CREATE INDEX idx_transaction_date ON USER_WALLET_HISTORY (DATE);
 
 -- DELETE USER ACCOUNT
 DELETE FROM USERS CASCADE WHERE USER_ID = 1; -- Replace 1 with the ID of the user you want to delete
