@@ -1,0 +1,3 @@
+INSERT INTO USERS (EMAIL, PHONE, FIRST_NAME, LAST_NAME, GENDER, AGE, STATUS, RFID_TAG, PASSWORD) VALUES
+('john.doe@gmail.com', '+1234567890', 'John', 'Doe', 'Male', 30, 'ACTIVE', crypt('ABC123',gen_salt('md5')), crypt('johndoe#1234', gen_salt('md5'))),
+('jane.smith@gmail.com', '+9876543210', 'Jane', 'Smith', 'Female', 25, 'ACTIVE', crypt('XYZ456',gen_salt('md5')), crypt('janeX@4321', gen_salt('md5')));
