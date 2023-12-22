@@ -41,6 +41,9 @@ $$ LANGUAGE plpgsql;
 SELECT * FROM get_available_parking_spaces('TWO-WHEELER', 'AVAILABLE');
 
 
+-- Creating an index for status to increase the performance
+CREATE INDEX idx_parking_space_status ON PARKING_SPACE(STATUS);
+
 -- Create a stored procedure named update_parking_space_status
 CREATE OR REPLACE PROCEDURE update_parking_space_status(
     p_space_name VARCHAR(255),
@@ -114,7 +117,7 @@ SELECT * FROM get_user_wallet_transactions(1); -- Replace 1 with the desired use
 CREATE OR REPLACE PROCEDURE calculate_monthly_income(
     p_month INTEGER,
     p_year INTEGER
-) LANGUAGE plpgsql AS $$
+) l AS $$
 DECLARE
     start_date TIMESTAMP := TO_TIMESTAMP(p_year || '-' || p_month || '-01', 'YYYY-MM-DD');
     end_date TIMESTAMP := start_date + INTERVAL '1 month' - INTERVAL '1 day';
@@ -132,7 +135,7 @@ BEGIN
     GROUP BY
         DATE_TRUNC('month', uw.DATE);
 END;
-$$;
+$$LANGUAGE plpgsq;
 
 
 -- Call the stored procedure with specific month and year
