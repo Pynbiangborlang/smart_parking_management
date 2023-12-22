@@ -7,12 +7,12 @@ INSERT INTO ADMIN (admin_email, phone_no, first_name, last_name, gender, passwor
 --2. PARKING_LOT
 
 INSERT INTO PARKING_LOT(name, address, admin_email) VALUES
-('J.SMITH PARKING',	'123 Main Street, Cityville'	'john.smith@gmail.com');
+('J.SMITH PARKING',	'123 Main Street, Cityville', 'john.smith@gmail.com');
 
-INSERT INTO SECTIONS (name, parking_lot_id) VALUES
-('SECTION-1', 1),
-('SECTION-2', 1),
-('SECTION-3', 1),
+INSERT INTO SECTIONS (secition_id, name, parking_lot_id) VALUES
+(1, 'SECTION-1', 1),
+(2, 'SECTION-2', 1),
+(3, 'SECTION-3', 1),
 
 INSERT INTO SPACE_TYPE(type, rate_per_min) VALUES
 ('TWO-WHEELER',	0.3),
@@ -52,41 +52,41 @@ INSERT INTO PARKING_SPACE(name, status, section_id, type) VALUES
 ('SEC3-SP12','AVAILABLE',3	,'FOUR-WHEELER');
 
 --4 PARKING SENSORS
-INSERT INTO PARKING_SENSOR(tag, status, space_id) FROM stdin;
-('SEC1-SP1-S1',	'ACTIVE' ,1),
-('SEC1-SP2-S2',	'ACTIVE' ,2),
-('SEC1-SP3-S3',	'ACTIVE' ,3),
-('SEC1-SP4-S4',	'ACTIVE' ,4),
-('SEC1-SP5-S3',	'ACTIVE' ,5),
-('SEC1-SP6-S4',	'ACTIVE' ,6),
-('SEC2-SP1-S1',	'ACTIVE' ,7),
-('SEC2-SP2-S2',	'ACTIVE' ,8),
-('SEC2-SP3-S3',	'ACTIVE' ,9),
-('SEC2-SP4-S4',	'ACTIVE' ,10),
-('SEC2-SP5-S5',	'ACTIVE' ,11),
-('SEC2-SP6-S6',	'ACTIVE' ,12),
-('SEC2-SP7-S7',	'ACTIVE' ,13),
-('SEC2-SP8-S8',	'ACTIVE' ,14),
-('SEC2-SP9-S9',	'ACTIVE' ,15),
-('SEC2-SP10-S10', 'ACTIVE' ,16),
-('SEC2-SP11-S11', 'ACTIVE' ,17),
-('SEC2-SP12-S12', 'ACTIVE' ,18),
-('SEC3-SP1-S1',	'ACTIVE' ,19),
-('SEC3-SP2-S2',	'ACTIVE' ,20),
-('SEC3-SP3-S3',	'ACTIVE' ,21),
-('SEC3-SP4-S4',	'ACTIVE' ,22),
-('SEC3-SP5-S5',	'ACTIVE' ,23),
-('SEC3-SP6-S6',	'ACTIVE' ,24),
-('SEC3-SP7-S7',	'ACTIVE' ,25),
-('SEC3-SP8-S8',	'ACTIVE' ,26),
-('SEC3-SP9-S9',	'ACTIVE' ,27),
-('SEC3-SP10-S10', 'ACTIVE' ,28),
-('SEC3-SP11-S11', 'ACTIVE' ,29),
-('SEC3-SP12-S12', 'ACTIVE' ,30);
+INSERT INTO PARKING_SENSOR(tag, status, space_id) VALUES
+('SEC1-SP1-S1',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC1-SP1')),
+('SEC1-SP2-S2',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC1-SP2')),
+('SEC1-SP3-S3',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC1-SP3')),
+('SEC1-SP4-S4',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC1-SP4')),
+('SEC1-SP5-S3',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC1-SP1')),
+('SEC1-SP6-S4',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC1-SP1')),
+('SEC2-SP1-S1',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC2-SP1')),
+('SEC2-SP2-S2',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC2-SP2')),
+('SEC2-SP3-S3',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC2-SP3')),
+('SEC2-SP4-S4',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC2-SP4')),
+('SEC2-SP5-S5',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC2-SP5')),
+('SEC2-SP6-S6',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC2-SP6')),
+('SEC2-SP7-S7',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC2-SP7')),
+('SEC2-SP8-S8',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC2-SP8')),
+('SEC2-SP9-S9',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC2-SP9')),
+('SEC2-SP10-S10', 'ACTIVE' ,(select space_id from parking_space where name = 'SEC2-SP10')),
+('SEC2-SP11-S11', 'ACTIVE' ,(select space_id from parking_space where name = 'SEC2-SP11')),
+('SEC2-SP12-S12', 'ACTIVE' ,(select space_id from parking_space where name = 'SEC2-SP12')),
+('SEC3-SP1-S1',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC3-SP1')),
+('SEC3-SP2-S2',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC3-SP2')),
+('SEC3-SP3-S3',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC3-SP3')),
+('SEC3-SP4-S4',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC3-SP4')),
+('SEC3-SP5-S5',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC3-SP5')),
+('SEC3-SP6-S6',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC3-SP6')),
+('SEC3-SP7-S7',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC3-SP7')),
+('SEC3-SP8-S8',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC3-SP8')),
+('SEC3-SP9-S9',	'ACTIVE' ,(select space_id from parking_space where name = 'SEC3-SP9')),
+('SEC3-SP10-S10', 'ACTIVE' ,(select space_id from parking_space where name = 'SEC3-SP10')),
+('SEC3-SP11-S11', 'ACTIVE' ,(select space_id from parking_space where name = 'SEC3-SP11')),
+('SEC3-SP12-S12', 'ACTIVE' ,(select space_id from parking_space where name = 'SEC3-SP12'));
 
 --5 USERS
 INSERT INTO USERS (EMAIL, PHONE, FIRST_NAME, LAST_NAME, GENDER, AGE, STATUS, RFID_TAG, PASSWORD) VALUES
-('john.doe@gmail.com', '+1234567890', 'John', 'Doe', 'Male', 30, 'ACTIVE', crypt('ABC123',gen_salt('md5')), crypt('johndoe#1234', gen_salt('md5'))),
+('john.doe@gmail.com', '+1234567890', 'John', 'Doe', 'Male', 30, 'ACTIVE', crypt('ABC123',gen_salt('md5(select space_id from parking_space where name = 'SEC1-SP1')), crypt('johndoe#1234', gen_salt('md5'))),
 ('jane.smith@gmail.com', '+9876543210', 'Jane', 'Smith', 'Female', 25, 'ACTIVE', crypt('XYZ456',gen_salt('md5')), crypt('janeX@4321', gen_salt('md5')));
 
 
