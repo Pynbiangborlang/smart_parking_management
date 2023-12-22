@@ -7,7 +7,8 @@ SELECT
     GENDER, 
     AGE, 
     STATUS,
-    RFID_TAG 
+    RFID_TAG,
+    PASSWORD
 FROM USERS
 ORDER BY USER_ID;
 
@@ -115,15 +116,17 @@ SELECT * FROM get_user_wallet_transactions(1); -- Replace 1 with the desired use
 CREATE INDEX idx_user_wallet_history_user_id ON USER_WALLET_HISTORY(USER_ID);
 
 -- Create a stored procedure named calculate_monthly_income
-CREATE OR REPLACE PROCEDURE calculate_monthly_income(
+CREATE OR REPLACE FUNCTION calculate_monthly_income(
     p_month INTEGER,
     p_year INTEGER
-) l AS $$
-DECLARE
-    start_date TIMESTAMP := TO_TIMESTAMP(p_year || '-' || p_month || '-01', 'YYYY-MM-DD');
-    end_date TIMESTAMP := start_date + INTERVAL '1 month' - INTERVAL '1 day';
+) RETURNS TABLE (
+    MONTH TIMESTAMP,
+    CREDIT_AMOUNT NUMERIC,
+    DEBIT_AMOUNT NUMERIC,
+    MONTHLY_INCOME NUMERIC
+) AS $$
 BEGIN
-    CREATE OR REPLACE VIEW monthly_income_view AS
+    RETURN QUERY
     SELECT
         DATE_TRUNC('month', uw.DATE) AS MONTH,
         SUM(CASE WHEN uw.TYPE = 'C' THEN uw.AMOUNT ELSE 0 END) AS CREDIT_AMOUNT,
@@ -132,11 +135,14 @@ BEGIN
     FROM
         USER_WALLET_HISTORY uw
     WHERE
-        uw.DATE >= start_date AND uw.DATE <= end_date
+        uw.DATE >= TO_TIMESTAMP(p_year || '-' || p_month || '-01', 'YYYY-MM-DD')
+        AND uw.DATE <= TO_TIMESTAMP(p_year || '-' || p_month || '-01', 'YYYY-MM-DD') + INTERVAL '1 month' - INTERVAL '1 day'
     GROUP BY
         DATE_TRUNC('month', uw.DATE);
 END;
-$$LANGUAGE plpgsq;
+$$ LANGUAGE plpgsql;
+
+
 
 -- Call the stored procedure with specific month and year
 SELECT * FROM calculate_monthly_income(1, 2023); -- Replace 1 and 2023 with the desired month and year
