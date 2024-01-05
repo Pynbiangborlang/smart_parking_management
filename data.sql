@@ -3,9 +3,7 @@ CREATE EXTENSION pgcrypto;
 INSERT INTO parking_schema.ADMIN (admin_email, phone_no, first_name, last_name, gender, password) VALUES
 ('john.smith@gmail.com',	'5316849271',	'John',	'Smith', 'MALE', crypt('johndoe#1234', gen_salt('md5')));
 
-
 --2. PARKING_LOT
-
 INSERT INTO parking_schema.PARKING_LOT(name, address, admin_email) VALUES
 ('J.SMITH PARKING',	'123 Main Street, Cityville', 'john.smith@gmail.com');
 
@@ -89,26 +87,5 @@ INSERT INTO parking_schema.USERS (EMAIL, PHONE, FIRST_NAME, LAST_NAME, GENDER, A
 ('john.doe@gmail.com', '+1234567890', 'John', 'Doe', 'Male', 30, 'ACTIVE', crypt('ABC123',gen_salt('md5')), crypt('johndoe#1234', gen_salt('md5'))),
 ('jane.smith@gmail.com', '+9876543210', 'Jane', 'Smith', 'Female', 25, 'ACTIVE', crypt('XYZ456',gen_salt('md5')), crypt('janeX@4321', gen_salt('md5')));
 
---6 GATES
--- Insert data into GATES table
-INSERT INTO parking_schema.GATES (TYPE, SENSOR_TAG, SENSOR_STATUS, PARKING_LOT_ID) VALUES
-  ('ENTRY', 'ENT001', 'ACTIVE', 1),
-  ('EXIT', 'EXT001', 'ACTIVE', 1);
-
-
---1 ENTRY GATE DETECT USER
--- Insert data into GATE_SENSOR_READING table
-INSERT INTO parking_schema.GATE_SENSOR_READING (DATE, SENSOR_TAG, RFID_TAG) VALUES
- (CURRENT_TIMESTAMP, 'ENT001', 'ABC123');
-  
-SELECT * FROM GATE_SENSOR_READING;
-SELECT * FROM USER_PARKING_HISTORY;
-
---2 USER CHECK IN 
-INSERT INTO parking_schema.PARKING_SENSOR_READING(READING, DATE, SENSOR_ID) VALUES
-(1, CURRENT_TIMESTAMP, 1);
-
-SELECT * FROM PARKING_SENSOR_READING;
-SELECT * FROM PARKING
   
 

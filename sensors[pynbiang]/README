@@ -1,0 +1,7 @@
+After necessary tables and triggers creation and data insertion, follow the given steps -
+1. cretate all neccessary TRIGGERS 
+  -- run queries from file under sensors/pynbiang/triggers.sql
+1. insert sensors data
+   -- run queries from file under sensors[pynbiang]/data.sql
+2. run simulation queries
+   -- run simulation from file under sensors[pynbiang]/simulation.sql
