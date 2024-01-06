@@ -1,7 +1,7 @@
 CREATE EXTENSION pgcrypto;
 --1. ADMIN
 INSERT INTO parking_schema.ADMIN (admin_email, phone_no, first_name, last_name, gender, password) VALUES
-('john.smith@gmail.com',	'5316849271',	'John',	'Smith', 'MALE', crypt('johndoe#1234', gen_salt('md5')));
+('john.smith@gmail.com',	'5316849271',	'John',	'Smith', 'MALE', crypt('Johnsmith#1234', gen_salt('md5')));
 
 --2. PARKING_LOT
 INSERT INTO parking_schema.PARKING_LOT(name, address, admin_email) VALUES
@@ -48,39 +48,6 @@ INSERT INTO parking_schema.PARKING_SPACE(name, status, section_id, type) VALUES
 ('SEC3-SP10','AVAILABLE',(select section_id from parking_schema.sections where name='SECTION-3'),'FOUR-WHEELER'),
 ('SEC3-SP11','AVAILABLE',(select section_id from parking_schema.sections where name='SECTION-3'),'FOUR-WHEELER'),
 ('SEC3-SP12','AVAILABLE',(select section_id from parking_schema.sections where name='SECTION-3'),'FOUR-WHEELER');
-
---4 PARKING SENSORS
-INSERT INTO parking_schema.PARKING_SENSOR(tag, status, space_id) VALUES
-('SEC1-SP1-S1',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC1-SP1')),
-('SEC1-SP2-S2',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC1-SP2')),
-('SEC1-SP3-S3',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC1-SP3')),
-('SEC1-SP4-S4',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC1-SP4')),
-('SEC1-SP5-S3',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC1-SP5')),
-('SEC1-SP6-S4',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC1-SP6')),
-('SEC2-SP1-S1',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC2-SP1')),
-('SEC2-SP2-S2',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC2-SP2')),
-('SEC2-SP3-S3',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC2-SP3')),
-('SEC2-SP4-S4',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC2-SP4')),
-('SEC2-SP5-S5',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC2-SP5')),
-('SEC2-SP6-S6',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC2-SP6')),
-('SEC2-SP7-S7',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC2-SP7')),
-('SEC2-SP8-S8',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC2-SP8')),
-('SEC2-SP9-S9',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC2-SP9')),
-('SEC2-SP10-S10', 'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC2-SP10')),
-('SEC2-SP11-S11', 'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC2-SP11')),
-('SEC2-SP12-S12', 'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC2-SP12')),
-('SEC3-SP1-S1',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC3-SP1')),
-('SEC3-SP2-S2',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC3-SP2')),
-('SEC3-SP3-S3',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC3-SP3')),
-('SEC3-SP4-S4',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC3-SP4')),
-('SEC3-SP5-S5',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC3-SP5')),
-('SEC3-SP6-S6',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC3-SP6')),
-('SEC3-SP7-S7',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC3-SP7')),
-('SEC3-SP8-S8',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC3-SP8')),
-('SEC3-SP9-S9',	'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC3-SP9')),
-('SEC3-SP10-S10', 'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC3-SP10')),
-('SEC3-SP11-S11', 'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC3-SP11')),
-('SEC3-SP12-S12', 'ACTIVE' ,(select space_id from parking_schema.parking_space where name = 'SEC3-SP12'));
 
 --5 USERS
 INSERT INTO parking_schema.USERS (EMAIL, PHONE, FIRST_NAME, LAST_NAME, GENDER, AGE, STATUS, RFID_TAG, PASSWORD) VALUES
