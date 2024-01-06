@@ -3,14 +3,16 @@
 CREATE OR REPLACE FUNCTION parking_schema.generate_rfid_tag()
   RETURNS TRIGGER AS $$
 BEGIN
- 
+  
   NEW.RFID_TAG := MD5(random()::TEXT || NOW()::TEXT)::uuid;
 
+  
   NEW.RFID_TAG := crypt(NEW.RFID_TAG, gen_salt('md5'));
 
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
 
 DROP TRIGGER IF EXISTS users_before_insert_trigger ON parking_schema.USERS;
 CREATE TRIGGER users_before_insert_trigger
@@ -36,4 +38,5 @@ CREATE TRIGGER users_before_insert_trigger
   AFTER INSERT
   ON parking_schema.USERS
   FOR EACH ROW EXECUTE FUNCTION parking_schema.CREATE_WALLET_ON_REG_USER();
+
 
