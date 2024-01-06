@@ -1,0 +1,36 @@
+-- REGISTRATION OF NEW USER
+INSERT INTO parking_schema.USERS (EMAIL, PHONE, FIRST_NAME, LAST_NAME, GENDER, AGE, STATUS, RFID_TAG, PASSWORD) VALUES
+('ollie@gmail.com', '+9876567654', 'Ollie', 'Marbaniang', 'Male', 40, 'ACTIVE', crypt('CDE123',gen_salt('md5')), crypt('ollie#1234', gen_salt('md5')));
+SELECT * FROM parking_schema.USERS;
+
+-- first recharge of e-wallet after registration of new user
+-- wallet_id should correspond to the newly created e-wallet of new user
+INSERT INTO parking_schema.user_wallet_history(wallet_id, type, amount, date) values (1, 'C', 200, CURRENT_TIMESTAMP);
+SELECT * FROM parking_schema.user_wallet_history;
+
+-- USER ENTERS GATE
+-- RFID SHOULD BE SET TO RESPECTIVE USER
+INSERT INTO parking_schema.GATE_SENSOR_READING (DATE, SENSOR_TAG, RFID_TAG) VALUES (CURRENT_TIMESTAMP, 'ENT001', 'ABC123');
+SELECT * FROM parking_schema.gate_sensor_reading;
+
+-- USER CHECKS-IN
+INSERT INTO parking_schema.PARKING_SENSOR_READING(READING, DATE, SENSOR_ID) VALUES (1, CURRENT_TIMESTAMP, 1);
+SELECT * FROM PARKING_SCHEMA.PARKING_SENSOR_READING;
+SELECT * FROM PARKING_SCHEMA.USER_PARKING_HISTORY;
+
+-- USER CHECKS-OUT
+INSERT INTO parking_schema.PARKING_SENSOR_READING(READING, DATE, SENSOR_ID) VALUES (0, CURRENT_TIMESTAMP, 1);
+
+SELECT * FROM parking_schema.PARKING_SENSOR_READING;
+SELECT * FROM parking_schema.USER_PARKING_HISTORY;
+SELECT * FROM parking_schema.BILL;
+SELECT * FROM parking_schema.USER_WALLET;
+SELECT * FROM PARKING_SCHEMA.USER_WALLET_HISTORY;
+
+-- USER EXITS GATE
+INSERT INTO parking_schema.GATE_SENSOR_READING (READING_ID, DATE, SENSOR_TAG, RFID_TAG) VALUES
+ ((SELECT MAX(READING_ID) FROM parking_schema.GATE_SENSOR_READING) + 1, CURRENT_TIMESTAMP, 'EXT001', 'ABC123');
+ 
+SELECT * FROM PARKING_SCHEMA.USER_PARKING_HISTORY;
+
+
